@@ -1,9 +1,11 @@
-### **Overview**
+# **Overview**
+
 This project is a **Flask-based single-page weather dashboard** that displays real-time weather and forecast data for cities selected by the user. It’s built using **Python (Flask)** for the backend and **HTML, CSS, and JavaScript (AJAX)** for dynamic frontend updates. Favorite cities are stored in browser cookies, keeping the system lightweight and easy to maintain.
 
 ---
 
-### **Features**
+## **Features**
+
 - Real-time weather and forecast data powered by the **OpenWeatherMap API**  
 - **City search** with live, dynamic result updates  
 - **Add or remove favorites** using cookie-based storage  
@@ -13,15 +15,17 @@ This project is a **Flask-based single-page weather dashboard** that displays re
 
 ---
 
-### **Setup**
+## **Setup**
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/<your-username>/weather_dashboard.git
    cd weather_dashboard
    ```
 
 2. **Install dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -30,6 +34,7 @@ This project is a **Flask-based single-page weather dashboard** that displays re
    Add your **OpenWeatherMap API key** to `.env` or `config.py`.
 
 4. **Run the application:**
+
    ```bash
    flask run
    ```
