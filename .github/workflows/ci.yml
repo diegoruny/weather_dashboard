@@ -39,7 +39,7 @@ jobs:
       
       #JavaScript Lint (must pass to continue)
       - name: Run JSLint
-        run: jslint ./static/js/**/*.js
+        run: python -m jslint ./static/js/**/*.js
         
       #Python Lint (must pass to continue)
       - name: Run Pylint
