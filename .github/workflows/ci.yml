@@ -20,35 +20,32 @@ jobs:
       id-token: write
 
     steps:
-      # 1. Checkout
+      #Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # 2. JS lint with JSLint
-      - name: Install JSLint
-        run: pip install jslint
-
-      - name: Run JSLint
-        run: jslint ./static/js/**/*.js
         
-      # 3. Set up Python
+      #Set up Python
       - name: Set up Python 3.14
         uses: actions/setup-python@v4
         with:
           python-version: 3.14
 
-      # 4. Install dependencies
+      #Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint pytest flake8
+          pip install pylint pytest flake8 jslint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      # 5. Lint (must pass to continue)
+      
+      #JavaScript Lint (must pass to continue)
+      - name: Run JSLint
+        run: jslint ./static/js/**/*.js
+        
+      #Python Lint (must pass to continue)
       - name: Run Pylint
         run: pylint **/*.py
 
-      # 6. Test (must pass to continue)
+      #Test (must pass to continue)
       - name: Run pytest
         run: |
           # Run pytest in tests/ folder if it exists, ignore exit if no tests
@@ -58,11 +55,11 @@ jobs:
             echo "No tests folder found, skipping pytest"
           fi
 
-      # 7. Set up Docker Buildx
+      #Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 8. Verify .dockerignore
+      #Verify .dockerignore
       - name: Verify .dockerignore
         run: |
           echo "Checking Docker build context..."
@@ -79,14 +76,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # 10. Extract Docker metadata
+      #Extract Docker metadata
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # 11. Build and push Docker image
+      #Build and push Docker image
       - name: Build and push Docker image
         if: github.event_name != 'pull_request'
         id: build-and-push
@@ -99,7 +96,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # 12. Install cosign and sign
+      #Install cosign and sign
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v3
