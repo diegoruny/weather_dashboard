@@ -4,8 +4,7 @@ ignore=venv,__pycache__,migrations,tests
 
 [MESSAGES CONTROL]
 # Disable some noisy warnings
-disable=C0114,C0115,C0116  # missing module, class, function docstrings
-disable=R0903              # too few public methods
+disable=C0114,C0115,C0116,R0903   # missing module, class, function docstrings, too few public methods
 
 [FORMAT]
 max-line-length=120
