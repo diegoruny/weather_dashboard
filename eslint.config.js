@@ -8,9 +8,15 @@ export default defineConfig([
     },
     extends: ["js/recommended"],
     languageOptions: {
-      env: {
-        browser: true,   // adds document, window, console, fetch, etc.
-        es2021: true,    // modern JS globals
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: "module",
+      },
+      globals: {
+        document: "readonly",
+        window: "readonly",
+        console: "readonly",
+        fetch: "readonly",
       },
     },
     rules: {
