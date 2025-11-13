@@ -1,6 +1,6 @@
 [MASTER]
 # Directories to ignore
-ignore=venv,__pycache__,migrations,tests
+ignore=venv,__pycache__,migrations,tests,node_modules
 
 [MESSAGES CONTROL]
 # Disable some noisy warnings
