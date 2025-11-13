@@ -34,12 +34,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint pytest flake8 jslint
+          pip install pylint pytest flake8 pyjslint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
       #JavaScript Lint (must pass to continue)
       - name: Run JSLint
-        run: python -m jslint ./static/js/**/*.js
+        run: pyjslint ./static/js/**/*.js
         
       #Python Lint (must pass to continue)
       - name: Run Pylint
