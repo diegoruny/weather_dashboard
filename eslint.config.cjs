@@ -1,5 +1,5 @@
 // eslint.config.cjs
-import { FlatCompat } from '@eslint/eslintrc';
+const { FlatCompat } = require('@eslint/eslintrc');
 
 const compat = new FlatCompat({
   baseConfig: {
@@ -13,6 +13,6 @@ const compat = new FlatCompat({
   recommendedConfig: true,
 });
 
-export default [
+module.exports = [
   compat.config,
 ];
