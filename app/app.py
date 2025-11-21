@@ -46,7 +46,7 @@ def save_cookie(resp, name, value, max_age=cfg.MAX_COOKIE_AGE):
         name,
         json.dumps(value),
         max_age=max_age,
-        httponly=False,
+        httponly=True,
         samesite="Strict",
         secure=True,
     )
