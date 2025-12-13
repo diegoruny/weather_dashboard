@@ -52,6 +52,8 @@ jobs:
           
       - name: Run tests
         run: pytest
+        env:
+          GOOGLE_API_KEY: "test-key-for-ci"
 
 # -------------------------------
 # Node / Frontend Setup and Linting
