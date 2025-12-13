@@ -1,14 +1,18 @@
 import pytest
-from app.app import app   
+import requests_mock as rm
+from app.app import app
+
 
 @pytest.fixture
 def client():
-    """Test the client"""
-    app.config['TESTING'] = True
+    """Test client fixture with testing mode enabled"""
+    app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
 
-@pytest.fixture  
-def mock_api(requests_mock):
-    """Mock the API calls"""
-    return requests_mock
+
+@pytest.fixture
+def mock_api():
+    """Mock external API calls for testing"""
+    with rm.Mocker() as mock:
+        yield mock
