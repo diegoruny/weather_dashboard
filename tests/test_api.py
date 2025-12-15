@@ -173,3 +173,19 @@ def test_api_connection_error(client, mock_api):
     assert response.status_code == 502
     data = response.get_json()
     assert data["error"] == "Service unavailable"
+
+
+def test_api_invalid_json_response(client, mock_api):
+    """Test handling of invalid JSON from external API"""
+    # API returns 200 OK but with garbage instead of valid JSON
+    mock_api.get(
+        "https://weather.googleapis.com/v1/currentConditions:lookup",
+        text="<html>Not JSON at all</html>",
+        status_code=200,
+    )
+
+    response = client.get("/weather/current?lat=40.7128&lng=-74.0060")
+
+    assert response.status_code == 502
+    data = response.get_json()
+    assert data["error"] == "Invalid response from external service"
